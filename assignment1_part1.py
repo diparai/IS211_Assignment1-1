@@ -1,19 +1,35 @@
 
-def listDivide(numbers, divide):
+def listDivide(numbers=[], divide=2):
     """
     The function returns the number of elements in the numbers list that are divisibleby divide
     """
-    pass
+    newNumber = [x % divide for x in numbers]
+    answer = newNumber.count(0)
+    return answer
+
+class ListDivideException(Exception):
+    def __init__(self, message):
+        self.message = message
 
 def testListDivide():
     """
     Test listDivide
     """
-    assert listDivide([1,2,3,4,5]) == 2
-    assert listDivide([2,4,6,8,10]) == 5
-    assert listDivide([30, 54, 63,98, 100], divide=10) == 2
-    assert listDivide([]) == 0
-    assert listDivide([1,2,3,4,5], 1) == 5
-    
-if __name__ == "__main__":
-    testListDivide()
+    result = listDivide([1, 2, 3, 4, 5])
+    if result != 2:
+        raise ListDivideException("Failed")
+    result = listDivide([2, 4, 6, 8, 10])
+    if result != 5:
+        raise ListDivideException("Failed")
+    result = listDivide([30, 54, 63, 98, 100], divide=10)
+    if result != 2:
+        raise ListDivideException("Failed")
+    result = listDivide([])
+    if result != 0:
+        raise ListDivideException("Failed")
+    result = listDivide([1, 2, 3, 4, 5], 1)
+    if result != 5:
+        raise ListDivideException("Failed")
+
+testListDivide()
+
